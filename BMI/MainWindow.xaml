@@ -9,19 +9,29 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.Resources>
             <Style TargetType="local:TextBoxWithPlaceholder">
                 <Setter Property="FontSize" Value="20"/>
-                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="MaxWidth" Value="150"/>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="Margin" Value="10"/>
             </Style>
         </Grid.Resources>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="GreenYellow" Offset="1"/>
+                <GradientStop Color="White" Offset="0.75"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Label HorizontalAlignment="Center" FontSize="40">BMI</Label>
-        <local:TextBoxWithPlaceholder Grid.Row="1" Placeholder="Súly" x:Name="massField" KeyDown="calculate"/>
-        <local:TextBoxWithPlaceholder Grid.Row="2" Placeholder="Magasság" x:Name="heightField" KeyDown="calculate"/>
-        <Label Grid.Row="3" Content="{Binding}" ContentStringFormat="Eredmény: {0} kg/m^2" x:Name="resultLabel" HorizontalAlignment="Center" FontSize="30"/>
+        <local:TextBoxWithPlaceholder Grid.Row="1" Placeholder="Súly [kg]" x:Name="massField" KeyDown="calculate"/>
+        <local:TextBoxWithPlaceholder Grid.Row="2" Placeholder="Magasság [m]" x:Name="heightField" KeyDown="calculate"/>
+        <Label Grid.Row="3" Content="{Binding}" ContentStringFormat="Eredmény: {0} kg/m²" x:Name="resultLabel" HorizontalAlignment="Center" FontSize="30"/>
     </Grid>
 </Window>

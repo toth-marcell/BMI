@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BMI
 {
@@ -30,9 +20,9 @@ namespace BMI
             {
                 try
                 {
-                    double mass = double.Parse(massField.Text);
-                    double height = double.Parse(heightField.Text);
-                    resultLabel.DataContext = mass / Math.Pow(height, 2);
+                    double mass = double.Parse(massField.Text.Trim().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture);
+                    double height = double.Parse(heightField.Text.Trim().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture);
+                    resultLabel.DataContext = Math.Round(mass / Math.Pow(height, 2), 2);
                 }
                 catch (Exception ex)
                 {
