@@ -32,6 +32,9 @@
         <Label HorizontalAlignment="Center" FontSize="40">BMI</Label>
         <local:TextBoxWithPlaceholder Grid.Row="1" Placeholder="Súly [kg]" x:Name="massField" KeyDown="calculate"/>
         <local:TextBoxWithPlaceholder Grid.Row="2" Placeholder="Magasság [m]" x:Name="heightField" KeyDown="calculate"/>
-        <Label Grid.Row="3" Content="{Binding}" ContentStringFormat="Eredmény: {0} kg/m²" x:Name="resultLabel" HorizontalAlignment="Center" FontSize="30"/>
+        <StackPanel Grid.Row="3">
+            <Label Content="{Binding}" ContentStringFormat="Eredmény: {0} kg/m²" x:Name="resultLabel" HorizontalAlignment="Center" FontSize="30"/>
+            <Label Content="{Binding}" ContentStringFormat="({0})" x:Name="categoryLabel" HorizontalAlignment="Center" FontSize="30"/>
+        </StackPanel>
     </Grid>
 </Window>
