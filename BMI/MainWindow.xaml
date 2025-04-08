@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BMI"
         mc:Ignorable="d"
-        Title="BMI" Height="450" Width="800">
+        Title="BMI" Height="650" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
@@ -23,18 +25,30 @@
                 <Setter Property="Margin" Value="10"/>
             </Style>
         </Grid.Resources>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="GreenYellow" Offset="1"/>
-                <GradientStop Color="White" Offset="0.75"/>
-            </LinearGradientBrush>
-        </Grid.Background>
         <Label HorizontalAlignment="Center" FontSize="40">BMI</Label>
-        <local:TextBoxWithPlaceholder Grid.Row="1" Placeholder="Súly [kg]" x:Name="massField" KeyDown="calculate"/>
+        <local:TextBoxWithPlaceholder Grid.Row="1" Placeholder="Tömeg [kg]" x:Name="massField" KeyDown="calculate"/>
         <local:TextBoxWithPlaceholder Grid.Row="2" Placeholder="Magasság [m]" x:Name="heightField" KeyDown="calculate"/>
-        <StackPanel Grid.Row="3">
+        <local:TextBoxWithPlaceholder Grid.Row="3" Placeholder="Név" x:Name="nameField" KeyDown="calculate"/>
+        <local:TextBoxWithPlaceholder Grid.Row="4" Placeholder="Életkor" x:Name="ageField" KeyDown="calculate"/>
+        <StackPanel Grid.Row="5">
             <Label Content="{Binding}" ContentStringFormat="Eredmény: {0} kg/m²" x:Name="resultLabel" HorizontalAlignment="Center" FontSize="30"/>
             <Label Content="{Binding}" ContentStringFormat="({0})" x:Name="categoryLabel" HorizontalAlignment="Center" FontSize="30"/>
         </StackPanel>
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="5" x:Name="resultsTable" FontSize="15">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Név" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Életkor" Binding="{Binding Age}"/>
+                <DataGridTextColumn Header="Tömeg [kg]" Binding="{Binding Mass}"/>
+                <DataGridTextColumn Header="Magasság [m]" Binding="{Binding Height}"/>
+                <DataGridTextColumn Header="BMI [kg/m²]" Binding="{Binding BMI}"/>
+                <DataGridTextColumn Header="Kategória" Binding="{Binding Category}"/>
+            </DataGrid.Columns>
+            <DataGrid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="GreenYellow" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.5"/>
+                </LinearGradientBrush>
+            </DataGrid.Background>
+        </DataGrid>
     </Grid>
 </Window>

@@ -20,27 +20,45 @@ namespace BMI
             {
                 try
                 {
+                    string name = nameField.Text;
+                    int age = int.Parse(ageField.Text.Trim());
                     double mass = double.Parse(massField.Text.Trim().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture);
                     double height = double.Parse(heightField.Text.Trim().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture);
-                    double bmi = Math.Round(mass / Math.Pow(height, 2), 2);
-                    resultLabel.DataContext = bmi;
-                    categoryLabel.DataContext = BMICategory(bmi);
+                    resultsTable.Items.Add(new Result(mass, height, name, age));
                 }
                 catch (Exception ex)
                 {
-                    if (ex is FormatException) MessageBox.Show("Számokat kell megadni!");
+                    if (ex is FormatException) MessageBox.Show("Számokat kell megadni a tömeg, magasság és kor mezőkbe!");
                     else throw ex;
                 }
             }
         }
-        string BMICategory(double bmi)
+    }
+    struct Result
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public double Mass { get; set; }
+        public double Height { get; set; }
+        public double BMI => Math.Round(Mass / Math.Pow(Height, 2), 2);
+        public string Category
         {
-            if (bmi < 18.5) return "sovány";
-            if (bmi < 25) return "normál";
-            if (bmi < 30) return "kicsit dagadt";
-            if (bmi < 35) return "egészen dagadt";
-            if (bmi < 35) return "nagyon dagadt";
-            return "teljesen dagadt";
+            get
+            {
+                if (BMI < 18.5) return "sovány";
+                if (BMI < 25) return "normál";
+                if (BMI < 30) return "kicsit dagadt";
+                if (BMI < 35) return "egészen dagadt";
+                if (BMI < 35) return "nagyon dagadt";
+                return "teljesen dagadt";
+            }
+        }
+        public Result(double mass, double height, string name, int age)
+        {
+            Mass = mass;
+            Height = height;
+            Name = name;
+            Age = age;
         }
     }
 }
